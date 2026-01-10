@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Community Mod & Engagement Suite</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <script type="importmap">
+    {
+        "imports": {
+            "marked": "https://esm.sh/marked",
+            "dompurify": "https://esm.sh/dompurify"
+        }
+    }
+    </script>
+    <script type="module" src="app.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <div class="brand">
+                <div class="logo">r/dev_simulation</div>
+                <div class="online-count"><span id="peer-count">1</span> online</div>
+            </div>
+            <button id="mod-toggle" class="btn-icon" aria-label="Toggle Mod Mode">
+                🛡️ Mod Mode
+            </button>
+        </header>
+
+        <!-- Engagement Section (Polls) -->
+        <section id="engagement-panel" class="panel">
+            <div class="panel-header">
+                <h3>Live Engagement</h3>
+                <button id="create-poll-btn" class="btn-text" style="display:none;">+ New Poll</button>
+            </div>
+            <div id="poll-container">
+                <div class="empty-state">Waiting for active polls...</div>
+            </div>
+        </section>
+
+        <!-- Feed Section -->
+        <section id="feed-panel" class="panel flex-grow">
+            <div class="panel-header sticky">
+                <h3>Discussion</h3>
+                <div class="actions">
+                    <button id="refresh-btn" class="btn-icon">🔄</button>
+                </div>
+            </div>
+            
+            <div id="comments-list" class="comments-list">
+                <!-- Comments injected here -->
+                <div class="loading-spinner">Loading community...</div>
+            </div>
+        </section>
+
+        <!-- Post Input -->
+        <footer class="input-area">
+            <div class="user-identity">
+                <span id="my-avatar">👤</span>
+                <span id="my-username">Guest</span>
+            </div>
+            <form id="comment-form">
+                <input type="text" id="comment-input" placeholder="Add to the discussion..." autocomplete="off">
+                <button type="submit" class="btn-primary">Post</button>
+            </form>
+        </footer>
+    </div>
+
+    <!-- Modals -->
+    <div id="poll-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Create Community Poll</h3>
+            <input type="text" id="poll-question" placeholder="Ask the community something..." maxlength="80">
+            <div class="poll-options">
+                <input type="text" class="poll-option" placeholder="Option 1">
+                <input type="text" class="poll-option" placeholder="Option 2">
+            </div>
+            <div class="modal-actions">
+                <button id="cancel-poll" class="btn-secondary">Cancel</button>
+                <button id="publish-poll" class="btn-primary">Publish Poll</button>
+            </div>
+        </div>
+    </div>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>

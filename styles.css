@@ -1,0 +1,209 @@
+:root {
+    --bg-color: #030303;
+    --card-bg: #1A1A1B;
+    --text-primary: #D7DADC;
+    --text-secondary: #818384;
+    --accent: #FF4500; /* Reddit Orange */
+    --accent-hover: #CC3700;
+    --mod-color: #0079D3;
+    --border: #343536;
+    --danger: #ff585b;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--bg-color);
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+}
+
+/* Header */
+header {
+    padding: 12px 16px;
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand .logo { font-weight: 700; font-size: 1.1rem; }
+.online-count { font-size: 0.8rem; color: #46D160; display: flex; align-items: center; gap: 4px; }
+.online-count::before { content: ''; width: 8px; height: 8px; background: #46D160; border-radius: 50%; display: inline-block; }
+
+/* Panels */
+.panel { padding: 0 16px; }
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.sticky { position: sticky; top: 0; background: var(--bg-color); z-index: 10; }
+
+/* Engagement / Polls */
+#engagement-panel { border-bottom: 1px solid var(--border); padding-bottom: 12px; }
+
+.poll-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid var(--border);
+}
+
+.poll-question { font-weight: 600; margin-bottom: 12px; font-size: 1rem; }
+
+.poll-option-btn {
+    display: block;
+    width: 100%;
+    background: #272729;
+    border: none;
+    color: var(--text-primary);
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    text-align: left;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.poll-option-btn .bar {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    background: rgba(255, 69, 0, 0.2);
+    z-index: 1;
+    transition: width 0.3s ease;
+}
+
+.poll-option-btn span { position: relative; z-index: 2; display: flex; justify-content: space-between; }
+.poll-option-btn.voted { border: 1px solid var(--accent); }
+
+/* Feed */
+.flex-grow { flex: 1; overflow-y: auto; display: flex; flex-direction: column; }
+.comments-list { flex: 1; padding-bottom: 80px; }
+
+.comment {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    animation: fadeIn 0.3s ease;
+}
+.comment.removed {
+    opacity: 0.5;
+    background: #1a0505;
+    border-left: 3px solid var(--danger);
+    padding-left: 12px;
+}
+
+.comment-meta {
+    display: flex;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    align-items: center;
+}
+
+.author { font-weight: 600; color: var(--text-primary); }
+.flair {
+    background: #272729;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+}
+.comment-body { font-size: 0.95rem; line-height: 1.4; overflow-wrap: break-word; }
+.comment-body img { max-width: 100%; border-radius: 4px; margin-top: 8px; }
+
+/* Mod Tools */
+.mod-controls {
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+}
+.btn-nuke {
+    background: transparent;
+    color: var(--danger);
+    border: 1px solid var(--danger);
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.mod-active #mod-toggle { color: var(--mod-color); border-color: var(--mod-color); background: rgba(0,121,211,0.1); }
+.mod-badge { color: var(--mod-color); font-weight: bold; font-size: 0.7rem; border: 1px solid var(--mod-color); padding: 0 4px; border-radius: 2px; margin-left: 4px;}
+
+/* Input Area */
+.input-area {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 600px;
+    background: var(--card-bg);
+    padding: 12px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.user-identity { font-size: 0.8rem; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; }
+
+#comment-form { display: flex; gap: 8px; }
+#comment-input {
+    flex: 1;
+    background: #272729;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 10px 16px;
+    color: white;
+    font-size: 0.95rem;
+}
+#comment-input:focus { outline: none; border-color: var(--text-secondary); }
+
+/* Buttons */
+.btn-primary { background: var(--text-primary); color: black; border: none; border-radius: 20px; padding: 0 16px; font-weight: 600; cursor: pointer; }
+.btn-secondary { background: transparent; color: var(--text-primary); border: 1px solid var(--border); border-radius: 20px; padding: 8px 16px; cursor: pointer; }
+.btn-icon { background: none; border: 1px solid var(--border); color: var(--text-primary); padding: 6px 10px; border-radius: 4px; cursor: pointer; }
+.btn-text { background: none; border: none; color: var(--accent); font-weight: 600; cursor: pointer; }
+
+/* Modal */
+.modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 100;
+}
+.modal.hidden { display: none; }
+.modal-content {
+    background: var(--card-bg);
+    padding: 24px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+}
+.modal h3 { margin-top: 0; }
+.poll-options input { width: 100%; margin-bottom: 8px; padding: 8px; background: #272729; border: 1px solid var(--border); color: white; border-radius: 4px; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
